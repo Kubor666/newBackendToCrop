@@ -10,7 +10,7 @@ const Role = db.role;
 const app = express();
 
 let corsOptions = {
-    origin: "http://localhost:8081"
+    origin: "http://localhost:8080"
 };
 
 app.use(cors(corsOptions));
@@ -73,7 +73,7 @@ db.mongoose
     });
 
 
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}.`);
 });
