@@ -20,6 +20,7 @@ app.use(bodyParser.urlencoded({ extended: true}));
 
 require('./routes/auth.routes')(app);
 require('./routes/user.routes')(app);
+require('./routes/image.routes')(app);
 
 app.get('/', (req, res) => {
     res.json({ message: "Henlo"});
