@@ -5,21 +5,20 @@ let sharp = require('sharp');
 let fs = require('fs');
 const replaceColor = require('replace-color')
 
-
-let storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, 'public/uploads/')
-  },
-  filename: function(req, file, cb) {
-    cb(null, file.originalname );
-  }
-});
-
-let upload = multer({ storage: storage }).single('imageUpload');
-
-exports.fileUpload = router.post('/upload', upload, function(req, res, next) {
+exports.fileUpload = (req, res) => {
   console.log(req.file);
   console.log("Start processing")
+
+  let storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, 'public/uploads/')
+    },
+    filename: function(req, file, cb) {
+      cb(null, file.originalname );
+    }
+  });
+
+  let upload = multer({ storage: storage }).single('imageUpload');
 
    sharp(req.file.path)
     .trim()
@@ -61,6 +60,4 @@ exports.fileUpload = router.post('/upload', upload, function(req, res, next) {
           res.end()
         }
       });
-  });
-
-module.exports = router;
+  };

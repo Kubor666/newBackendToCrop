@@ -11,5 +11,5 @@ module.exports = function (app) {
         next();
     });
 
-    app.post("api/upload", fileUpload.controller)
+    app.post("/api/upload", [], controller.fileUpload)
 };
