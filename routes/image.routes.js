@@ -1,5 +1,16 @@
 const controller = require('../controllers/image.controller')
+const multer = require('multer')
 
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, 'public/uploads/')
+    },
+    filename: function(req, file, cb) {
+      cb(null, file.originalname );
+    }
+  });
+const upload = multer({ storage: storage }).single('imageUpload');
 
 
 module.exports = function (app) {
@@ -11,5 +22,5 @@ module.exports = function (app) {
         next();
     });
 
-    app.post("/api/upload", [], controller.fileUpload)
+    app.post("/api/upload", upload, controller.fileUpload)
 };
